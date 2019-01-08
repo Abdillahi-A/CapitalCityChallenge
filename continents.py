@@ -1,11 +1,3 @@
-'''import requests
-
-def get_json_for_continent(continent):
-    request = requests.get('https://restcountries.eu/rest/v2/region/{}?fields=name;capital;'.format(continent))
-    return request.json()'''
-
-
-
 conts = {
 
 'Africa' : {
