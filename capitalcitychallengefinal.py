@@ -2,8 +2,6 @@ from continents import conts
 import sys
 import random
 from fuzzywuzzy import fuzz
-
-
     
 def check_valid_response():
     wants_to_play = input()
@@ -11,18 +9,15 @@ def check_valid_response():
         wants_to_play = input("Sorry that is not a valid option. Please choose 'yes' or 'no'\n")
     return wants_to_play
 
-
 def leave_game(wants_to_play):
     print("'\nThat's too bad. Come back when you are ready to play.'")
     print('\nBye!')
     sys.exit()
 
-
 def choose_continent():
         continent = input("Choose a continent: \n{}\n\n".format('\n'.join(conts)))
         return continent
         
-    
 def check_valid_continent(continent):
     while continent.capitalize() not in conts.keys():
         continent = input("Sorry that is not a valid response. Please choose one of the follwoing continents: \n{}\n\n".format('\n'.join(conts.keys())))
@@ -45,13 +40,12 @@ def ask_question(continent):
             correct_answers += 1
     
     return correct_answers, total_questions
-        
-        
+          
 def check_answer(answer, city):
-    if answer.lower() == 'quit':
-        wants_to_play = 'no'
-        leave_game(wants_to_play)
-    elif fuzz.ratio(answer.lower(), city.lower()) > 90:
+    if fuzz.ratio(answer.lower(), city.lower()) != 100 and fuzz.ratio(answer.lower(), city.lower()) > 90:
+        print(f"Hmmm I'll give you this one, but the correct spelling is {city}.")
+        return True
+    elif fuzz.ratio(answer.lower(), city.lower()) == 100:
         print("Well done! That is correct.")
         return True
     else:
@@ -59,9 +53,6 @@ def check_answer(answer, city):
 
 def display_score(correct_answers, total_questions):
     print(f"You got {correct_answers} out of cities {total_questions} correct.")
-
-'''def show_results(total_questions, correct_answers):
-    print("Results:\n You got {}/{} correct.".format(correct_answers,total_questions))'''
 
 def score_the_game(correct_answers, total_questions):
     print('\nResult:')
@@ -89,8 +80,6 @@ def play_again():
     
     return wants_to_play
     
-
-    
 def main():
     print("Hey!\nWelcome to Capital City Challenge!\nAre you ready to play? Yes or No")
     wants_to_play = check_valid_response()
@@ -102,7 +91,6 @@ def main():
         continent = choose_continent()
         continent = check_valid_continent(continent)
         print("Cool. You've Chosen {}. Let's see if you know your stuff.".format(continent.capitalize()))
-        print("Psss type 'quit' if you get bored and wat to exit game.\n")
         correct_answers, total_questions = ask_question(continent)
         score_the_game(correct_answers, total_questions)
         wants_to_play = play_again()
