@@ -5,13 +5,12 @@ from fuzzywuzzy import fuzz
     
 def check_valid_response():
     wants_to_play = input()
-    while wants_to_play.lower() not in ['yes', 'no']:
+    while wants_to_play.lower()[0] not in ['y', 'n']:
         wants_to_play = input("Sorry that is not a valid option. Please choose 'yes' or 'no'\n")
     return wants_to_play
 
-def leave_game(wants_to_play):
-    print("'\nThat's too bad. Come back when you are ready to play.'")
-    print('\nBye!')
+def leave_game():
+    print("'\nThat's too bad. Come back when you want to play again.\nBye!")
     sys.exit()
 
 def choose_continent():
@@ -43,13 +42,13 @@ def ask_question(continent):
           
 def check_answer(answer, city):
     if fuzz.ratio(answer.lower(), city.lower()) != 100 and fuzz.ratio(answer.lower(), city.lower()) > 90:
-        print(f"Hmmm I'll give you this one, but the correct spelling is {city}.")
+        print(f"Hmmm I'll give you this one, but the correct spelling is {city}.\n")
         return True
     elif fuzz.ratio(answer.lower(), city.lower()) == 100:
-        print("Well done! That is correct.")
+        print("Well done! That is correct.\n")
         return True
     else:
-        print("Sorry, the correct answer is {}".format(city))
+        print("Sorry, the correct answer is {}\n".format(city))
 
 def display_score(correct_answers, total_questions):
     print(f"You got {correct_answers} out of cities {total_questions} correct.")
@@ -73,28 +72,24 @@ def score_the_game(correct_answers, total_questions):
         print('Looks like you need a little more practice.') 
 
 def play_again():
-    wants_to_play = input("Do you want to play again? Please enter 'Yes' or 'No'\n")
+    play_again = input("Do you want to play again? Please enter 'Yes' or 'No'\n")
     
-    while wants_to_play.lower() not in ['yes', 'no']:
-        wants_to_play = input("Please type 'yes' or 'no'\n")
-    
-    return wants_to_play
+    while play_again.lower() not in ['y', 'n']:
+        play_again = input("Please type 'Y' to continue or 'N' to quit\n")
+
+    if play_again.lower() == 'y':
+        return True
     
 def main():
-    print("Hey!\nWelcome to Capital City Challenge!\nAre you ready to play? Yes or No")
-    wants_to_play = check_valid_response()
-    if wants_to_play.lower() == 'no':
-        leave_game(wants_to_play)
-        
-    while wants_to_play.lower() == 'yes':
-        print("\nCool let's play!")
+    print("Hey, Welcome to Capital City Challenge!\n")
+    while True:  
         continent = choose_continent()
         continent = check_valid_continent(continent)
         print("Cool. You've Chosen {}. Let's see if you know your stuff.".format(continent.capitalize()))
         correct_answers, total_questions = ask_question(continent)
         score_the_game(correct_answers, total_questions)
-        wants_to_play = play_again()
-    else:
-        leave_game(wants_to_play)
-        
+        if not play_again():
+            leave_game()
+            break
+            
 main()
