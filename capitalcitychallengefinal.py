@@ -72,7 +72,7 @@ def score_the_game(correct_answers, total_questions):
         print('Looks like you need a little more practice.') 
 
 def play_again():
-    play_again = input("Do you want to play again? Please enter 'Yes' or 'No'\n")
+    play_again = input("Do you want to play again? Please enter 'Y' or 'N'\n")
     
     while play_again.lower() not in ['y', 'n']:
         play_again = input("Please type 'Y' to continue or 'N' to quit\n")
