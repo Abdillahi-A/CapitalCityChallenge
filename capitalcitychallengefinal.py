@@ -2,12 +2,6 @@ from continents import conts
 import sys
 import random
 from fuzzywuzzy import fuzz
-    
-def check_valid_response():
-    wants_to_play = input()
-    while wants_to_play.lower()[0] not in ['y', 'n']:
-        wants_to_play = input("Sorry that is not a valid option. Please choose 'yes' or 'no'\n")
-    return wants_to_play
 
 def leave_game():
     print("'\nThat's too bad. Come back when you want to play again.\nBye!")
