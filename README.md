@@ -2,8 +2,7 @@
 Test your geography knowledge!
 
 ## Requirements:
-`pip install fuzzywuzzy`
-`pip install python-Levenshtein`
+`pip install fuzzywuzzy, python-Levenshtein`
 
 
 ## Change Log:
