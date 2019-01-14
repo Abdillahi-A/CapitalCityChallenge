@@ -1,6 +1,9 @@
 # CapitalCityChallenge
 Test your geography knowledge!
 
+## See it in action:
+![](example.gif)
+
 ## Requirements:
 `pip install fuzzywuzzy`
 
